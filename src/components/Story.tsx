@@ -14,4 +14,4 @@ const Story: React.FC<StoryProps> = ({ url }) => {
   );
 };
 
-export default Story;
+export default React.memo(Story);
