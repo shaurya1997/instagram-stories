@@ -12,9 +12,8 @@
 .user-indicators {
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
-  padding: 10px 0;
   position: relative;
   z-index: 1; /* Ensure user indicators are below the story */
   transition: opacity 0.5s ease;
@@ -38,6 +37,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  border-radius: 16px;
   z-index: 2; /* Ensure story is above the user indicators */
 }
 
@@ -53,7 +53,7 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-  pointer-events: auto; /* Allow navigation clicks */
+  z-index: 99;
 }
 
 .left, .right {
@@ -70,20 +70,57 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
-.close-button {
+.top-action {
   position: absolute;
-  top: 10px;
-  right: 10px;
   background: transparent;
   color: white;
   border: none;
   padding: 10px;
+  top:15px;
   cursor: pointer;
-  font-size: 24px;
-  transition: opacity 0.3s ease;
+  font-size: 16px;
   z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.top-action:last-child{
+  margin-left: 16px;
 }
 
-.close-button:hover {
-  opacity: 0.7;
+.top-action.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.heading {
+  font-size: 24px;
+  padding:8px 0 0 8px
+}
+.btn{
+  background: transparent;
+  border: none;
+  margin-right: 16px;
+  cursor: pointer;
+}
+.userDetails {
+  margin-left: 16px;
+}
+.progress-bar-container {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  z-index: 3;
+  display: grid;
+  gap:8px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  height: 5px;
+  transition: width 0.1s linear;
 }
