@@ -127,7 +127,7 @@ const StoryContainer: React.FC = () => {
           <div className={`top-action ${isStoryVisible ? "visible" : ""}`}>
             <div className="userDetails">{users[selectedUserIndex].name}</div>
             <button onClick={closeStories} className="btn">
-              <FaTimes color="black" />
+              <FaTimes color="white" />
             </button>
           </div>
           <div
