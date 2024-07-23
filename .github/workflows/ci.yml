@@ -33,7 +33,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to Netlify
-        uses: netlify/actions/deploy@v1
+        uses: netlify/actions/cli@master
         with:
           publish-dir: 'build'
           production-deploy: true
