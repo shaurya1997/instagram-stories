@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles/UserIndicator.css';
 interface UserIndicatorProps {
     name: string;
@@ -15,4 +16,4 @@ interface UserIndicatorProps {
     );
   };
   
-  export default UserIndicator;
+  export default React.memo(UserIndicator);
