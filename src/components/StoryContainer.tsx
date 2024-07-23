@@ -99,7 +99,7 @@ const StoryContainer: React.FC = () => {
     setSelectedUserIndex(null);
     setCurrentIndex(0);
   };
-  console.log(progressWidths);
+ 
   return (
     <div className="story-container">
       <div className={`user-indicators ${isStoryVisible ? "hidden" : ""}`}>
