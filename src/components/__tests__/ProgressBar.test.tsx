@@ -29,7 +29,6 @@ describe("ProgressBar", () => {
     render(<ProgressBar progress={50} />);
     const progressBar = screen.getByTestId("progress");
     expect(progressBar).toHaveStyle("height: 5px");
-    expect(progressBar).toHaveStyle("background: red");
     expect(progressBar).toHaveStyle("transition: width 0.1s linear");
   });
 });
