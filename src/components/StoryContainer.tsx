@@ -4,6 +4,8 @@ import UserIndicator from "./UserIndicator";
 import "./styles/StoryContainer.css";
 import users from "../config";
 import { FaTimes } from "react-icons/fa";
+import { User, Story as StoryType } from "./type";
+import ProgressBar from "./ProgressBar";
 
 const StoryContainer: React.FC = () => {
   const [selectedUserIndex, setSelectedUserIndex] = useState<number | null>(
@@ -20,7 +22,7 @@ const StoryContainer: React.FC = () => {
       setIsStoryVisible(true);
       const totalStories = users[selectedUserIndex].stories.length;
       const duration = users[selectedUserIndex].stories[currentIndex].duration;
-      let progress = 0
+      let progress = 0;
       progressTimeoutRef.current = setInterval(() => {
         progress += 100 / (duration / 100);
         setProgressWidths((prev) => {
@@ -98,14 +100,18 @@ const StoryContainer: React.FC = () => {
     setIsStoryVisible(false);
     setSelectedUserIndex(null);
     setCurrentIndex(0);
+    if (storyTimeoutRef.current) {
+      clearTimeout(storyTimeoutRef.current);
+    }
+    if (progressTimeoutRef.current) clearInterval(progressTimeoutRef.current);
   };
- 
+
   return (
     <div className="story-container">
       <div className={`user-indicators ${isStoryVisible ? "hidden" : ""}`}>
         <div className="heading">Instagram</div>
         <div style={{ display: "flex", marginTop: "8px" }}>
-          {users.map((user, index) => (
+          {users.map((user: User, index) => (
             <UserIndicator
               key={user.id}
               name={user.name}
@@ -121,12 +127,12 @@ const StoryContainer: React.FC = () => {
             <Story url={users[selectedUserIndex].stories[currentIndex].url} />
           </div>
           <div className="navigation">
-            <div className="left" onClick={prevStory}></div>
-            <div className="right" onClick={nextStory}></div>
+            <div className="left" onClick={prevStory} data-testid="next"></div>
+            <div className="right" onClick={nextStory} data-testid="prev"></div>
           </div>
           <div className={`top-action ${isStoryVisible ? "visible" : ""}`}>
             <div className="userDetails">{users[selectedUserIndex].name}</div>
-            <button onClick={closeStories} className="btn">
+            <button onClick={closeStories} className="btn" data-testid="close">
               <FaTimes color="white" />
             </button>
           </div>
@@ -136,18 +142,14 @@ const StoryContainer: React.FC = () => {
               gridTemplateColumns: `repeat(${users[selectedUserIndex].stories.length}, 1fr)`,
             }}
           >
-            {users[selectedUserIndex].stories.map((_, index) => (
-              <div className="progress-bar">
-                <div
-                  style={{
-                    height: "5px",
-                    background: "red",
-                    width: `${progressWidths[index] || 0}%`,
-                    transition: "width 0.1s linear",
-                  }}
+            {users[selectedUserIndex].stories.map(
+              (item: StoryType, index: number) => (
+                <ProgressBar
+                  key={item.id}
+                  progress={progressWidths[index] || 0}
                 />
-              </div>
-            ))}
+              )
+            )}
           </div>
         </>
       )}
