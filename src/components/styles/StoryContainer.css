@@ -54,20 +54,14 @@
   display: flex;
   justify-content: space-between;
   z-index: 99;
+  background: transparent;
 }
 
 .left, .right {
   width: 50%;
   height: 100%;
   cursor: pointer;
-}
-
-.left {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.right {
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
 }
 
 .top-action {
@@ -113,14 +107,6 @@
   z-index: 3;
   display: grid;
   gap:8px;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 100%;
-  background-color: white;
-  height: 5px;
-  transition: width 0.1s linear;
+  margin-left: 16px;
+  margin-right: 16px;
 }
